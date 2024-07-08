@@ -1,4 +1,9 @@
-from typing import Final
+# Import the necessary module
+from dotenv import load_dotenv
+import os
 
-TOKEN: Final = '7356210574:AAHVppGUUYPqFKj-wyt7yeaGiHCuV__fo7s'
-BOT_USERNAME: Final = '@raydiumhelper_bot'
+# Load environment variables from the .env file (if present)
+load_dotenv()
+
+BOT_TOKEN = os.environ['TOKEN']
+BOT_USERNAME = os.environ['BOT_USERNAME']

@@ -3,7 +3,22 @@ from telegram.ext import ContextTypes
 from helpers import handle_baseURL, get_pool_data, extract_pool_details
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('Hello! Thanks for chatting with me! I am a Raydium Bot')
+    welcome_message = (
+        "👋 Welcome to the Raydium Helper Bot!\n\n"
+        "I'm here to assist you with everything related to Raydium liquidity pools.\n\n"
+        "📊 **Features:**\n"
+        "- View all available liquidity pools on Raydium\n"
+        "- Check out concentrated liquidity pools\n"
+        "- Discover standard liquidity pools\n"
+        "- Add liquidity to pools effortlessly\n\n"
+        "To get started, use the following commands:\n"
+        "- `/all_pools` to view all available pools\n"
+        "- `/concentrated_pools` to view concentrated pools\n"
+        "- `/standard_pools` to view standard pools\n\n"
+        "Let's dive into the world of Raydium! 🌊💰\n\n"
+        "Don't forget to follow [Raydium Protocol](https://x.com/RaydiumProtocol), [Superteam DAO](https://x.com/SuperteamDAO), [Fay Nguyen](https://x.com/faynguyen07), and [Venn Luu](https://x.com/vennluu) for the latest updates on blockchain and more! 🚀"
+    )
+    await update.message.reply_text(welcome_message)
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('I am a Raydium Bot! Please type something so I can respond!')
