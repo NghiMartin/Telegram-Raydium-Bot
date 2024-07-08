@@ -12,6 +12,12 @@ def get_pool_data(url):
         print(f"Error fetching pool data: {e}")
         return None
 
+def format_number(value, decimals=0):
+    if decimals == 0:
+        return f"{round(value):,}"
+    else:
+        return f"{value:,.{decimals}f}"
+
 def extract_pool_details(pool_data, title):
     pools = pool_data['data']['data']
     pool_details = [title]
@@ -19,15 +25,19 @@ def extract_pool_details(pool_data, title):
     for pool in pools:
         mintA_symbol = pool['mintA']['symbol']
         mintB_symbol = pool['mintB']['symbol']
-        # mintA_address = pool['mintA']['address']
-        # mintB_address = pool['mintB']['address']
+  
         pool_id = pool.get("id")
 
+        tvl = pool['tvl']
+        volume = pool['day']['volume']
+        volume_fee = pool['day']['volumeFee']
+        apr = pool['day']['apr']
+
         details = f"""🔄 {mintA_symbol} ↔️ {mintB_symbol}
-        🌊 Liquidity: {pool['tvl']} 💰
-        📈 24h Volume: {pool['day']['volume']} 💰
-        💵 24h Fee: {pool['day']['volumeFee']}
-        📅 24h APR: {pool['day']['apr']}
+        🌊 Liquidity: ${format_number(tvl)} 💰
+        📈 24h Volume: ${format_number(volume)} 💰
+        💵 24h Fee: ${format_number(volume_fee)}
+        📅 24h APR: {format_number(apr, 2)}%
         🔗 [Add liquidity to this pool](https://raydium.io/liquidity/increase/?mode=add&pool_id={pool_id})
         """
         pool_details.append(details)
